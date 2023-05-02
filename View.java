@@ -15,7 +15,6 @@ public class View {
                 break;
             }
         }
-
         return userInput;
     }
 
