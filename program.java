@@ -1,6 +1,9 @@
-public class program {
 
+class Program {
     public static void main(String[] args) {
-        System.out.println("agaefad");
+        Toys t1 = new Robot();
+        Toys t2 = new Robot();
+        System.out.println(t1);
+        System.out.println(t2);
     }
 }
