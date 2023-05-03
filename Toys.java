@@ -1,19 +1,18 @@
 import java.util.Random;
-
-import javax.sound.midi.Soundbank;
+import java.util.UUID;
 
 public abstract class Toys {
-    static short id = 0;
+    String id;
     String name;
     byte quanity;
     byte scpecificGravity;
     Random rnd = new Random();
 
     public Toys() {
-        this.id = ++this.id;
+        this.id = UUID.randomUUID().toString();
         this.name = "Defaul_name_id_" + this.id;
         this.quanity = (byte) rnd.nextInt(50);
-        this.scpecificGravity = (byte) rnd.nextInt(100);
+        this.scpecificGravity = (byte) (rnd.nextInt(80) + 20);
     }
 
     @Override
