@@ -120,16 +120,16 @@ public class Controller {
 
     // **Функиция принимает строку и диапазон [start :end] и проверяет, что введно
     // число из этого диапазона */
-    public static int ValidationInput(String input, byte start, byte end) {
+    public static int ValidationInput(String input, int i, int j) {
         int userInt = -1;
 
         try {
             userInt = Integer.parseInt(input);
-            if (userInt != (int) userInt || userInt > end || userInt < start)
+            if (userInt != (int) userInt || userInt > j || userInt < i)
                 throw new Exception();
         } catch (Exception e) {
             System.out.println(
-                    "\nВводить можно только цифры из диапазона меню!" + " от " + start + " до " + end
+                    "\nВводить можно только цифры из диапазона меню!" + " от " + i + " до " + j
                             + "\nПовторите ввод!\n");
         }
         return userInt;
