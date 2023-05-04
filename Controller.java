@@ -1,8 +1,6 @@
 
-// import java.text.CollationElementIterator;
-// import java.util.ArrayList;
-// import java.util.Collection;
-import java.io.ObjectOutputStream.PutField;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -27,9 +25,8 @@ public class Controller {
                 System.out.print("\nВыберите тип игрушки, которую хотите добавить: ");
                 byte start = 1;
                 byte end = 3;
-                // Преобразуем введеную строку к числу
+                // Проверяем на валидность введные данные
                 int typeToys = ValidationInput(View.SelectedRobot(), start, end);
-
                 switch (typeToys) {
                     case 1:
                         que.add(new Robot());
@@ -60,7 +57,7 @@ public class Controller {
                         end = 100;
                         System.out.print("Задайте цифрами от 1 до 100 шанс игрушки попасть в розыгрыш: ");
                         typeToys = ValidationInput(sc.nextLine(), start, end);
-                        if (typeToys > 1) {
+                        if (1 < typeToys && typeToys < 100) {
                             que.add(new Robot(typeToys));
                             SelectMenu(View.ShowMenu());
                         }
@@ -71,7 +68,7 @@ public class Controller {
                         end = 100;
                         System.out.print("Задайте цифрами от 1 до 100 шанс игрушки попасть в розыгрыш: ");
                         typeToys = ValidationInput(sc.nextLine(), start, end);
-                        if (typeToys > 1) {
+                        if (1 < typeToys && typeToys < 100) {
                             que.add(new Constructor(typeToys));
                             SelectMenu(View.ShowMenu());
                         }
@@ -83,7 +80,7 @@ public class Controller {
                         end = 100;
                         System.out.print("Задайте цифрами от 1 до 100 шанс игрушки попасть в розыгрыш: ");
                         typeToys = ValidationInput(sc.nextLine(), start, end);
-                        if (typeToys > 1) {
+                        if (1 < typeToys && typeToys < 100) {
                             que.add(new Boadr_game(typeToys));
                             SelectMenu(View.ShowMenu());
                         }
@@ -94,7 +91,7 @@ public class Controller {
                 return 2;
             case 3:
                 // Показать весь массив игрушек
-                System.out.println("QUE");
+                System.out.println("PriorityQueue");
                 for (Object toys : que) {
                     System.out.println(toys);
                 }
@@ -110,9 +107,35 @@ public class Controller {
                 System.out.println("Массив призовых игрушек: ");
                 for (Toys prize : prizeList) {
                     System.out.println(prize);
+
+                }
+                SelectMenu(View.ShowMenu());
+                return 5;
+            case 6:
+                if (!prizeList.isEmpty()) {
+                    String elementPrizeList = prizeList.peek().toString();
+                    String nameFile = "new_file.txt";
+                    if (!prizeList.isEmpty()) {
+                        try {
+                            FileWriter writer = new FileWriter(nameFile, false);
+                            // запись всей строки
+                            if (prizeList.isEmpty())
+                                throw new Exception();
+                            writer.write(elementPrizeList);
+                            writer.flush();
+                            System.out.println("\nfile new_file.txt saved\n");
+                        } catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                    }
+
+                } else {
+                    System.out.println("\nРозыгранных игрушек нет, добавьте игрушки и проведите розыгрыш\n");
                     SelectMenu(View.ShowMenu());
                 }
-            case 6:
+
+                return 6;
+            case 7:
                 break;
         }
         return menu;
@@ -120,18 +143,20 @@ public class Controller {
 
     // **Функиция принимает строку и диапазон [start :end] и проверяет, что введно
     // число из этого диапазона */
-    public static int ValidationInput(String input, int i, int j) {
+    public static int ValidationInput(String input, int start, int end) {
         int userInt = -1;
 
         try {
             userInt = Integer.parseInt(input);
-            if (userInt != (int) userInt || userInt > j || userInt < i)
+            if (userInt != (int) userInt || userInt > start || userInt < end)
                 throw new Exception();
         } catch (Exception e) {
             System.out.println(
-                    "\nВводить можно только цифры из диапазона меню!" + " от " + i + " до " + j
+                    "\nВводить можно только цифры из диапазона меню!" + " от " + start + " до " + end
                             + "\nПовторите ввод!\n");
+
         }
         return userInt;
     }
+
 }
