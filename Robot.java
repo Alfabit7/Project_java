@@ -1,4 +1,3 @@
-import java.util.UUID;
 
 public class Robot extends Toys {
     static int num = 0;
@@ -10,4 +9,5 @@ public class Robot extends Toys {
     public static Robot CreateRobot() {
         return new Robot();
     }
+
 }

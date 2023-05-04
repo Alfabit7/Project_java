@@ -8,7 +8,7 @@ public class View {
         int userInput;
         while (true) {
             System.out.println(
-                    "\n1- Добавить игрушку\n2- Удалить игрушку\n3- Показать информацию о игрушке\n4- Показать массив игрушек\n5 -Выход из программы\n");
+                    "\n1- Добавить игрушку\n2- Удалить игрушку\n3- Показать информацию о игрушке\n4- Показать массив игрушек\n5- Провести розыгрыш игрушки\n6 -Выход из программы\n");
 
             System.out.print("Выберите пункт меню: ");
             userInput = sc.nextInt();
@@ -26,6 +26,8 @@ public class View {
                 case 4:
                     return 4;
                 case 5:
+                    return 5;
+                case 6:
                     break;
             }
             return userInput;
