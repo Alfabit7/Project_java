@@ -32,21 +32,19 @@ public class View {
                         break;
                 }
                 return userInt;
-                // }
             } catch (Exception e) {
-                System.out.println("\nВведите значения от 1 до 7! Буквы вводить нельзя!\n");
+                // System.out.println("\nВведите значения от 1 до 7! Буквы вводить нельзя!\n");
             }
         }
     }
 
-    public static int SelectedRobot() {
+    public static String SelectedRobot() {
         Scanner sc = new Scanner(System.in);
-        int userInput;
+        String userInput;
         System.out.println("\n1- Robot\n2- Constructor\n3- Boadr Game\n ");
         System.out.print("Выберите пункт меню: ");
-        userInput = sc.nextInt();
+        userInput = sc.nextLine();
         return userInput;
-
     }
 
 }

@@ -2,6 +2,7 @@
 // import java.text.CollationElementIterator;
 // import java.util.ArrayList;
 // import java.util.Collection;
+import java.io.ObjectOutputStream.PutField;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -24,7 +25,11 @@ public class Controller {
             case 1:
                 // Добавить игрушку
                 System.out.print("\nВыберите тип игрушки, которую хотите добавить: ");
-                int typeToys = View.SelectedRobot();
+                byte start = 1;
+                byte end = 3;
+                // Преобразуем введеную строку к числу
+                int typeToys = ValidationInput(View.SelectedRobot(), start, end);
+
                 switch (typeToys) {
                     case 1:
                         que.add(new Robot());
@@ -39,30 +44,49 @@ public class Controller {
                         SelectMenu(View.ShowMenu());
                         return 3;
                 }
+                SelectMenu(View.ShowMenu());
                 return 1;
+
             case 2:
                 // Добавить игрушку с заданием вручную шанса игрушки попасть в розыгрыш
-                int userInput;
                 System.out.print("\nВыберите тип игрушки, которую хотите добавить: ");
-                typeToys = View.SelectedRobot();
+                start = 1;
+                end = 3;
+                // Фнкция проверки валидности введнных данных
+                typeToys = ValidationInput(View.SelectedRobot(), start, end);
                 switch (typeToys) {
                     case 1:
+                        start = 1;
+                        end = 100;
                         System.out.print("Задайте цифрами от 1 до 100 шанс игрушки попасть в розыгрыш: ");
-                        userInput = sc.nextInt();
-                        que.add(new Robot(userInput));
+                        typeToys = ValidationInput(sc.nextLine(), start, end);
+                        if (typeToys > 1) {
+                            que.add(new Robot(typeToys));
+                            SelectMenu(View.ShowMenu());
+                        }
                         SelectMenu(View.ShowMenu());
                         return 1;
                     case 2:
+                        start = 1;
+                        end = 100;
                         System.out.print("Задайте цифрами от 1 до 100 шанс игрушки попасть в розыгрыш: ");
-                        userInput = sc.nextInt();
-                        que.add(new Constructor(userInput));
+                        typeToys = ValidationInput(sc.nextLine(), start, end);
+                        if (typeToys > 1) {
+                            que.add(new Constructor(typeToys));
+                            SelectMenu(View.ShowMenu());
+                        }
                         SelectMenu(View.ShowMenu());
 
                         return 2;
                     case 3:
+                        start = 1;
+                        end = 100;
                         System.out.print("Задайте цифрами от 1 до 100 шанс игрушки попасть в розыгрыш: ");
-                        userInput = sc.nextInt();
-                        que.add(new Boadr_game(userInput));
+                        typeToys = ValidationInput(sc.nextLine(), start, end);
+                        if (typeToys > 1) {
+                            que.add(new Boadr_game(typeToys));
+                            SelectMenu(View.ShowMenu());
+                        }
                         SelectMenu(View.ShowMenu());
                         return 3;
                 }
@@ -90,9 +114,24 @@ public class Controller {
                 }
             case 6:
                 break;
-
         }
         return menu;
     }
 
+    // **Функиция принимает строку и диапазон [start :end] и проверяет, что введно
+    // число из этого диапазона */
+    public static int ValidationInput(String input, byte start, byte end) {
+        int userInt = -1;
+
+        try {
+            userInt = Integer.parseInt(input);
+            if (userInt != (int) userInt || userInt > end || userInt < start)
+                throw new Exception();
+        } catch (Exception e) {
+            System.out.println(
+                    "\nВводить можно только цифры из диапазона меню!" + " от " + start + " до " + end
+                            + "\nПовторите ввод!\n");
+        }
+        return userInt;
+    }
 }
