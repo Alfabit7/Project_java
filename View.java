@@ -30,8 +30,6 @@ public class View {
             }
             return userInt;
 
-            // System.out.println("\nВведите значения от 1 до 7! Буквы вводить нельзя!\n");
-
         }
     }
 
