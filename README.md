@@ -45,3 +45,4 @@
 
 * Планировщик расписания cron https://crontab.guru/every-3-minutes
 * Java https://metanit.com/java/
+* PriorityQueue https://www.youtube.com/watch?v=B_W9P-6Esbk&list=PLqj7-hRTFl_oDMBjI_EstsFcDAwt-Arhs&index=24
