@@ -66,9 +66,6 @@ public class Controller {
                         SelectMenu(View.ShowMenu());
                         return 3;
                 }
-
-                System.out.print("Введите номер (индекс) игрушки: ");
-
                 SelectMenu(View.ShowMenu());
                 return 2;
             case 3:
