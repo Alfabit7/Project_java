@@ -4,9 +4,9 @@ import java.util.UUID;
 import javax.print.attribute.standard.MediaSize.Other;
 
 public abstract class Toys implements Comparable<Toys> {
-    String id;
-    String name;
-    byte quanity;
+    protected String id;
+    protected String name;
+    protected byte quanity;
     protected int scpecificGravity;
     Random rnd = new Random();
 
@@ -17,7 +17,15 @@ public abstract class Toys implements Comparable<Toys> {
         // генерируем случайное значение от 1 до 50
         this.quanity = (byte) (rnd.nextInt(50) + 1);
         this.scpecificGravity = (byte) (rnd.nextInt(80) + 20);
-        // this.scpecificGravity = (byte) (Math.random() * 61 + 20);
+    }
+
+    public Toys(int scpecificGravity) {
+        // генерирует ID
+        this.id = UUID.randomUUID().toString();
+        this.name = "Defaul_name_id_" + this.id;
+        // генерируем случайное значение от 1 до 50
+        this.quanity = (byte) (rnd.nextInt(50) + 1);
+        this.scpecificGravity = scpecificGravity;
     }
 
     @Override

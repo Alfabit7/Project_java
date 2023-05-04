@@ -2,12 +2,13 @@
 public class Robot extends Toys {
     static int num = 0;
 
-    public Robot() {
+    public Robot(int userInput) {
         this.name = "Robot_id_" + (++num);
+        this.scpecificGravity = userInput;
     }
 
-    public static Robot CreateRobot() {
-        return new Robot();
+    public Robot() {
+        this.name = "Robot_id_" + (++num);
     }
 
 }
